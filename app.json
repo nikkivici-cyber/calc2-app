@@ -24,7 +24,14 @@
       "output": "single"
     },
     "plugins": [
-      "expo-router",
+      [
+        "expo-router",
+        {
+          "asyncRoutes": {
+            "web": false
+          }
+        }
+      ],
       "expo-notifications"
     ],
     "scheme": "calc2"

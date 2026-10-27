@@ -39,3 +39,8 @@ Note: on iOS/Android, KaTeX is loaded from the jsDelivr CDN, so math needs an in
 
 Reminders need a real device. They work in Expo Go for local notifications; for an App Store / TestFlight build use
 `npx eas-cli@latest build -p ios`.
+
+## Web preview
+
+`node scripts/build-web-single.mjs` builds the whole app into one self-contained file, `dist-single/index.html`
+(JS, KaTeX CSS and fonts inlined). Open it in a browser or host it anywhere. Reminders don't run on the web.
