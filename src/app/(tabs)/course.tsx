@@ -1,17 +1,17 @@
-import { router } from 'expo-router';
 import { ScrollView, StyleSheet, Text } from 'react-native';
 
 import CourseList from '../../components/CourseList';
 import { CONTENT_MAX_WIDTH } from '../../lib/layout';
+import { openItem } from '../../lib/navigation';
 import { colors } from '../../lib/theme';
 
 export default function CourseScreen() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.intro}>
-        One lesson a day is the plan — but you can open any lesson here to work ahead.
+        One lesson a day is the plan, with a 20-question practice session at the end of each block. You can open any lesson here to work ahead.
       </Text>
-      <CourseList onSelect={(id) => router.push({ pathname: '/subtopic/[id]', params: { id } })} />
+      <CourseList onSelect={openItem} />
     </ScrollView>
   );
 }

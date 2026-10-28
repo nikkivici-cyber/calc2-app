@@ -11,6 +11,7 @@ type Props = {
   question: PracticeQuestion;
   number?: number;
   subtitle?: string;
+  onAnswer?: (correct: boolean) => void; // fires on the first answer of each attempt
 };
 
 function shuffledIndices(n: number): number[] {
@@ -24,12 +25,13 @@ function shuffledIndices(n: number): number[] {
 
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 
-export default function PracticeQuestionCard({ question, number, subtitle }: Props) {
+export default function PracticeQuestionCard({ question, number, subtitle, onAnswer }: Props) {
   const { isBookmarked, toggleBookmark } = useBookmarks();
   const { markCorrect } = useProgress();
   const [attempt, setAttempt] = useState(0);
   // Stores the ORIGINAL option index the student picked (null = unanswered).
   const [selected, setSelected] = useState<number | null>(null);
+  const [showHint, setShowHint] = useState(false);
 
   // Content always lists the correct answer first, so shuffle on display (and on each retry).
   const order = useMemo(() => shuffledIndices(question.options.length), [question.id, attempt]);
@@ -40,6 +42,7 @@ export default function PracticeQuestionCard({ question, number, subtitle }: Pro
 
   const retry = () => {
     setSelected(null);
+    setShowHint(false);
     setAttempt((a) => a + 1);
   };
 
@@ -74,8 +77,10 @@ export default function PracticeQuestionCard({ question, number, subtitle }: Pro
             key={optIdx}
             disabled={answered}
             onPress={() => {
+              const correct = optIdx === question.correct_index;
               setSelected(optIdx);
-              if (optIdx === question.correct_index) markCorrect(question.id);
+              if (correct) markCorrect(question.id);
+              onAnswer?.(correct);
             }}
             style={({ pressed }) => [
               styles.option,
@@ -93,10 +98,33 @@ export default function PracticeQuestionCard({ question, number, subtitle }: Pro
         );
       })}
 
+      {!answered && question.hint && (
+        <View style={styles.hintRow}>
+          {showHint ? (
+            <View style={styles.hintBox}>
+              <Text style={styles.hintLabel}>💡 Hint</Text>
+              <MathText text={question.hint} />
+            </View>
+          ) : (
+            <Pressable onPress={() => setShowHint(true)} hitSlop={6}>
+              <Text style={styles.hintLink}>💡 Show hint</Text>
+            </Pressable>
+          )}
+        </View>
+      )}
+
       {answered && (
         <View style={[styles.explanation, { borderLeftColor: isCorrect ? colors.correct : colors.wrong }]}>
           <Text style={styles.explanationTitle}>{isCorrect ? '✅ Correct!' : '❌ Not quite'}</Text>
-          <MathText text={question.explanation} />
+          <Text style={styles.solutionLabel}>Worked solution</Text>
+          {question.solution.map((step, i) => (
+            <View key={i} style={styles.solutionStep}>
+              <Text style={styles.solutionNum}>{i + 1}</Text>
+              <View style={{ flex: 1 }}>
+                <MathText text={step} />
+              </View>
+            </View>
+          ))}
           <Pressable onPress={retry} style={styles.retryBtn}>
             <Text style={styles.retryText}>↻ Try again</Text>
           </Pressable>
@@ -153,6 +181,33 @@ const styles = StyleSheet.create({
     borderLeftWidth: 4,
   },
   explanationTitle: { fontSize: 16, fontWeight: '700', marginBottom: 4, color: colors.text },
+  solutionLabel: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: colors.muted,
+    textTransform: 'uppercase',
+    letterSpacing: 0.4,
+    marginTop: 4,
+    marginBottom: 2,
+  },
+  solutionStep: { flexDirection: 'row', gap: 8, marginTop: 6 },
+  solutionNum: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: colors.card,
+    textAlign: 'center',
+    lineHeight: 20,
+    fontSize: 12,
+    fontWeight: '700',
+    color: colors.primary,
+    marginTop: 2,
+    overflow: 'hidden',
+  },
+  hintRow: { marginTop: 10 },
+  hintLink: { color: colors.primary, fontWeight: '600' },
+  hintBox: { backgroundColor: '#FFFBEB', borderRadius: 8, padding: 10 },
+  hintLabel: { fontSize: 12, fontWeight: '700', color: '#B45309', marginBottom: 2 },
   retryBtn: { alignSelf: 'flex-start', marginTop: 8 },
   retryText: { color: colors.primary, fontWeight: '600' },
 });

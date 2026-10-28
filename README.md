@@ -2,6 +2,11 @@
 
 Expo (SDK 58) + Expo Router app for Calculus II review, built around **one lesson a day**.
 
+Content follows the syllabus in 4 blocks: 27 lessons (one per textbook section: 5.5, 6.1–6.7, 7.1–7.8,
+11.1–11.10, 10.1–10.4), each with a guided example and 5 practice questions with hints and full worked
+solutions, plus a 20-question **Block Practice** session at the end of each block (31 days in total).
+Midterm and final exams are marked in the course list.
+
 - **Today tab:** today's lesson, streak, and whether you're on track, ahead or behind the one-a-day plan.
 - **Daily reminder:** a local notification at the time you pick, only if today's lesson isn't finished yet.
   It's scheduled on the device, so no server or API key is needed (iOS/Android only).
@@ -27,13 +32,14 @@ npx expo start        # scan the QR code with Expo Go, or press w for web
 - `src/lib/reminders.ts` — keeps a rolling week of local reminders in sync with progress
 - `src/components/CourseList.tsx` — lesson list used by the Course tab and the iPad sidebar
 - `src/lib/bookmarks.tsx` — bookmarked ids, persisted with AsyncStorage
-- `src/data/content.ts` — all course content
+- `src/data/lessons/block1-4.ts` — lessons; `src/data/lessons/practice.ts` — block practice questions
+- `src/data/content.ts` — assembles the daily plan (lessons + practice sessions) and exam markers
+- `src/app/practice/[id].tsx` — block practice session (20 questions, first-try score, new set)
 
 ## Adding content
 
-Add a `Subtopic` object to `SUBTOPICS` (array order = day order) in `src/data/content.ts`. Write LaTeX inside `` r`...` `` strings
-(single backslashes, e.g. `` r`$\int x\,dx$` ``). Put the correct option at `correct_index` — order doesn't matter
-since options are shuffled. Question `id`s must be unique and should never change, because bookmarks are stored by id.
+Add a `lesson(...)` with `mc(...)` questions to the right block file in `src/data/lessons/` (array order = day order). Write LaTeX inside `` r`...` `` strings
+(single backslashes, e.g. `` r`$\int x\,dx$` ``). Put the correct answer in `answer` and distractors in `wrong` — options are shuffled on display. Question `id`s must be unique and should never change, because bookmarks are stored by id.
 
 Note: on iOS/Android, KaTeX is loaded from the jsDelivr CDN, so math needs an internet connection.
 

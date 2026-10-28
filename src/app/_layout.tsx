@@ -19,6 +19,7 @@ export default function RootLayout() {
         >
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="subtopic/[id]" options={{ title: '' }} />
+          <Stack.Screen name="practice/[id]" options={{ title: '' }} />
         </Stack>
       </BookmarksProvider>
     </ProgressProvider>

@@ -31,7 +31,7 @@ export default function BookmarksScreen() {
         <PracticeQuestionCard
           key={q.id}
           question={q}
-          subtitle={`${q.subtopic.unit_title.split(':')[0]} · ${q.subtopic.title}`}
+          subtitle={`${q.unit_title.split(':')[0]} · ${q.source_title}`}
         />
       ))}
     </ScrollView>

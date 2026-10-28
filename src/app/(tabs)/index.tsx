@@ -2,10 +2,10 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 
-import { PLAN, dayNumber } from '../../data/content';
-import type { Subtopic } from '../../data/types';
+import { PLAN, PRACTICE_SESSION_SIZE, dayNumber, itemLabel, type PlanItem } from '../../data/content';
 import { formatTime } from '../../lib/dates';
 import { CONTENT_MAX_WIDTH } from '../../lib/layout';
+import { openItem } from '../../lib/navigation';
 import { useProgress, type ScheduleStatus } from '../../lib/progress';
 import { remindersSupported } from '../../lib/reminders';
 import { colors } from '../../lib/theme';
@@ -17,10 +17,6 @@ const REMINDER_TIMES = [
   { hour: 19, minute: 0 },
   { hour: 21, minute: 0 },
 ];
-
-function open(s: Subtopic) {
-  router.push({ pathname: '/subtopic/[id]', params: { id: s.subtopic_id } });
-}
 
 function statusLabel(status: ScheduleStatus): { text: string; color: string; bg: string } {
   switch (status.kind) {
@@ -73,17 +69,17 @@ export default function TodayScreen() {
         <>
           <View style={[styles.card, styles.doneCard]}>
             <Text style={styles.cardLabel}>Completed today</Text>
-            {p.doneToday.map((s) => (
-              <Text key={s.subtopic_id} style={styles.doneItem}>
-                ✓ Day {dayNumber(s.subtopic_id)} · {s.title}
+            {p.doneToday.map((item) => (
+              <Text key={item.id} style={styles.doneItem}>
+                ✓ Day {dayNumber(item.id)} · {itemLabel(item)}
               </Text>
             ))}
             <Text style={styles.muted}>Your daily target is met — no reminder today.</Text>
           </View>
-          <LessonCard s={p.nextUp!} label="Want to get ahead? (optional)" secondary />
+          <LessonCard item={p.nextUp!} label="Want to get ahead? (optional)" secondary />
         </>
       ) : (
-        <LessonCard s={p.nextUp!} label={`Day ${dayNumber(p.nextUp!.subtopic_id)}`} />
+        <LessonCard item={p.nextUp!} label={`Day ${dayNumber(p.nextUp!.id)}`} />
       )}
 
       {/* Overall progress */}
@@ -148,23 +144,27 @@ export default function TodayScreen() {
   );
 }
 
-function LessonCard({ s, label, secondary }: { s: Subtopic; label: string; secondary?: boolean }) {
+function LessonCard({ item, label, secondary }: { item: PlanItem; label: string; secondary?: boolean }) {
   const { correctCount } = useProgress();
-  const done = correctCount(s);
-  const total = s.practice_questions.length;
+  const isLesson = item.kind === 'lesson';
+  const done = isLesson ? correctCount(item.lesson) : 0;
+  const total = isLesson ? item.lesson.practice_questions.length : PRACTICE_SESSION_SIZE;
+  const description = isLesson
+    ? `Section ${item.lesson.section} · concept, guided example, ${total} practice questions with worked solutions`
+    : `End-of-block review · ${total} mixed exam-style questions`;
   return (
     <Pressable
-      onPress={() => open(s)}
+      onPress={() => openItem(item)}
       style={({ pressed }) => [styles.card, !secondary && styles.heroCard, pressed && { opacity: 0.9 }]}
     >
       <Text style={[styles.cardLabel, !secondary && { color: '#C7D2FE' }]}>{label}</Text>
-      <Text style={[styles.lessonTitle, !secondary && { color: '#FFF' }]}>{s.title}</Text>
-      <Text style={[styles.muted, !secondary && { color: '#E0E7FF' }]}>
-        {s.unit_title} · concept, guided example, {total} practice questions
+      <Text style={[styles.lessonTitle, !secondary && { color: '#FFF' }]}>
+        {isLesson ? item.title : `★ ${item.title}`}
       </Text>
+      <Text style={[styles.muted, !secondary && { color: '#E0E7FF' }]}>{description}</Text>
       <View style={[styles.cta, secondary && styles.ctaSecondary]}>
         <Text style={[styles.ctaText, secondary && { color: colors.primary }]}>
-          {done === 0 ? 'Start lesson' : `Continue (${done}/${total} correct)`} →
+          {!isLesson ? 'Start practice' : done === 0 ? 'Start lesson' : `Continue (${done}/${total} correct)`} →
         </Text>
       </View>
     </Pressable>

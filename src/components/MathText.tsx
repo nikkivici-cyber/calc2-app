@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { WebView, type WebViewMessageEvent } from 'react-native-webview';
 
-import { KATEX_DELIMITERS, toHtml } from '../lib/mathMarkup';
+import { KATEX_DELIMITERS, MIN_DISPLAY_SCALE, toHtml } from '../lib/mathMarkup';
 
 type Props = {
   text: string;
@@ -31,7 +31,14 @@ export default function MathText({ text, fontSize = 15, color = '#374151' }: Pro
 </style></head>
 <body><div id="c">${toHtml(text)}</div>
 <script>
-  function report(){ window.ReactNativeWebView.postMessage(String(document.getElementById('c').scrollHeight)); }
+  function fit(){
+    document.querySelectorAll('.katex-display').forEach(function(el){
+      el.style.fontSize = '';
+      var ratio = el.clientWidth / el.scrollWidth;
+      if (ratio < 1) el.style.fontSize = Math.max(${MIN_DISPLAY_SCALE}, ratio * 0.98) + 'em';
+    });
+  }
+  function report(){ fit(); window.ReactNativeWebView.postMessage(String(document.getElementById('c').scrollHeight)); }
   document.addEventListener('DOMContentLoaded', function(){
     try { renderMathInElement(document.getElementById('c'), {delimiters:${JSON.stringify(KATEX_DELIMITERS)}, throwOnError:false}); } catch(e) {}
     report();

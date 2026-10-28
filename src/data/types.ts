@@ -5,11 +5,13 @@ export type PracticeQuestion = {
   question: string;
   options: string[];
   correct_index: number;
-  explanation: string;
+  hint?: string;
+  solution: string[]; // full worked solution, one step per entry
 };
 
 export type Subtopic = {
   subtopic_id: string;
+  section: string; // textbook section, e.g. "7.1"
   title: string;
   unit_id: string;
   unit_title: string;
