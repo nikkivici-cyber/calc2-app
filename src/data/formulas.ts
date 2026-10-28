@@ -138,7 +138,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'u-sub',
     group: 'Integration Basics',
-    title: 'Substitution (5.5)',
+    title: 'Substitution (1.1)',
     keywords: 'u-sub chain rule change of limits',
     items: [
       { tex: r`\int f\big(g(x)\big)g'(x)\,dx = \int f(u)\,du,\quad u = g(x)` },
@@ -150,7 +150,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'parts',
     group: 'Techniques',
-    title: 'Integration by Parts (7.1)',
+    title: 'Integration by Parts (2.1)',
     intro: r`Choose $u$ by **LIATE**: Logarithmic, Inverse trig, Algebraic, Trig, Exponential.`,
     keywords: 'IBP LIATE tabular product rule',
     items: [
@@ -162,7 +162,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'trig-integrals',
     group: 'Techniques',
-    title: 'Trigonometric Integrals (7.2)',
+    title: 'Trigonometric Integrals (2.2)',
     keywords: 'powers of sine cosine tangent secant odd even',
     items: [
       { label: r`$\int\sin^m x\cos^n x\,dx$`, tex: r`\begin{gathered}\text{odd } m\text{: save } \sin x,\ \sin^2 x = 1 - \cos^2 x,\ u = \cos x \\ \text{odd } n\text{: save } \cos x,\ \cos^2 x = 1 - \sin^2 x,\ u = \sin x \\ \text{both even: half-angle formulas}\end{gathered}` },
@@ -172,7 +172,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'trig-sub',
     group: 'Techniques',
-    title: 'Trigonometric Substitution (7.3)',
+    title: 'Trigonometric Substitution (2.3)',
     intro: 'After integrating, draw a reference triangle to convert back to x.',
     keywords: 'square root a^2 - x^2 reference triangle',
     items: [
@@ -184,7 +184,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'partial-fractions',
     group: 'Techniques',
-    title: 'Partial Fractions (7.4)',
+    title: 'Partial Fractions (2.4)',
     intro: 'Long division first if deg(top) ≥ deg(bottom). Then factor the denominator completely.',
     keywords: 'rational functions decomposition repeated irreducible quadratic',
     items: [
@@ -197,7 +197,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'strategy',
     group: 'Techniques',
-    title: 'Integration Strategy (7.5)',
+    title: 'Integration Strategy (2.5)',
     keywords: 'which technique method checklist tables',
     items: [
       { tex: r`\begin{gathered}\text{1. Simplify (algebra, identities, split)} \\ \text{2. Obvious } u\text{-substitution?} \\ \text{3. Classify: parts / trig / trig sub / partial fractions} \\ \text{4. Rewrite, new substitution, or table}\end{gathered}` },
@@ -207,7 +207,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'improper',
     group: 'Techniques',
-    title: 'Improper Integrals (7.8)',
+    title: 'Improper Integrals (2.6)',
     keywords: 'infinite limits unbounded p-test convergence',
     items: [
       { tex: r`\int_a^\infty f(x)\,dx = \lim_{t\to\infty}\int_a^t f(x)\,dx` },
@@ -220,7 +220,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'net-change',
     group: 'Applications',
-    title: 'Velocity & Net Change (6.1)',
+    title: 'Velocity & Net Change (1.2)',
     keywords: 'displacement distance position rate',
     items: [
       { label: 'Displacement', tex: r`\int_a^b v(t)\,dt` },
@@ -231,7 +231,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'area',
     group: 'Applications',
-    title: 'Area Between Curves (6.2)',
+    title: 'Area Between Curves (1.3)',
     keywords: 'region top bottom right left',
     items: [
       { tex: r`A = \int_a^b\big[f(x) - g(x)\big]\,dx \quad (\text{top} - \text{bottom})` },
@@ -241,7 +241,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'volume',
     group: 'Applications',
-    title: 'Volumes (6.3, 6.4)',
+    title: 'Volumes (1.4, 1.5)',
     keywords: 'disk washer shell slicing revolution solid',
     items: [
       { label: 'Slicing', tex: r`V = \int_a^b A(x)\,dx` },
@@ -253,7 +253,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'arc-length',
     group: 'Applications',
-    title: 'Arc Length (6.5)',
+    title: 'Arc Length (1.6)',
     keywords: 'length of curve',
     items: [
       { tex: r`L = \int_a^b\sqrt{1 + \big[f'(x)\big]^2}\,dx` },
@@ -263,7 +263,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'physics',
     group: 'Applications',
-    title: 'Mass, Work & Springs (6.7)',
+    title: 'Mass, Work & Springs (1.7)',
     keywords: "density work hooke's law spring pumping",
     items: [
       { label: 'Mass', tex: r`m = \int_a^b\rho(x)\,dx` },
@@ -277,7 +277,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'sequences',
     group: 'Sequences & Series',
-    title: 'Sequence Limits (11.1)',
+    title: 'Sequence Limits (3.1)',
     keywords: 'limit r^n e growth rates',
     items: [
       { tex: r`\lim_{n\to\infty}r^n = 0 \ \ (|r| < 1) \qquad \lim_{n\to\infty}\left(1 + \frac an\right)^n = e^a` },
@@ -287,7 +287,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'geometric',
     group: 'Sequences & Series',
-    title: 'Geometric, p-Series, Telescoping (11.2–11.3)',
+    title: 'Geometric, p-Series, Telescoping (3.2–3.3)',
     keywords: 'sum geometric ratio harmonic',
     items: [
       { label: 'Geometric', tex: r`\sum_{n=0}^\infty ar^n = \frac{a}{1 - r} \quad (|r| < 1)`, note: 'Sum = first term ÷ (1 − r).' },
@@ -298,7 +298,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'tests',
     group: 'Sequences & Series',
-    title: 'Convergence Tests (11.3–11.7)',
+    title: 'Convergence Tests (3.3–3.7)',
     keywords: 'divergence integral comparison limit ratio root alternating',
     items: [
       { label: 'Divergence', tex: r`\lim a_n \ne 0 \Rightarrow \sum a_n \text{ diverges}` },
@@ -312,7 +312,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'power-series',
     group: 'Sequences & Series',
-    title: 'Power Series (11.8–11.9)',
+    title: 'Power Series (3.8–3.9)',
     keywords: 'radius interval of convergence differentiate integrate',
     items: [
       { tex: r`\sum c_n(x - a)^n \text{ converges for } |x - a| < R`, note: 'Test the endpoints separately.' },
@@ -323,7 +323,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'taylor',
     group: 'Sequences & Series',
-    title: 'Taylor & Maclaurin Series (11.10)',
+    title: 'Taylor & Maclaurin Series (3.10)',
     keywords: 'maclaurin e^x sin cos ln arctan',
     items: [
       { tex: r`f(x) = \sum_{n=0}^\infty\frac{f^{(n)}(a)}{n!}(x - a)^n` },
@@ -339,7 +339,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'parametric',
     group: 'Parametric & Polar',
-    title: 'Parametric Curves (10.1–10.2)',
+    title: 'Parametric Curves (4.1–4.2)',
     keywords: 'dy/dx tangent second derivative arc length',
     items: [
       { label: 'Slope', tex: r`\frac{dy}{dx} = \frac{dy/dt}{dx/dt}`, note: 'Horizontal tangent: dy/dt = 0. Vertical tangent: dx/dt = 0.' },
@@ -350,7 +350,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'polar',
     group: 'Parametric & Polar',
-    title: 'Polar Coordinates (10.3)',
+    title: 'Polar Coordinates (4.3)',
     keywords: 'conversion r theta rose cardioid',
     items: [
       { tex: r`x = r\cos\theta \qquad y = r\sin\theta` },
@@ -361,7 +361,7 @@ export const FORMULA_SECTIONS: FormulaSection[] = [
   {
     id: 'polar-calculus',
     group: 'Parametric & Polar',
-    title: 'Polar Area & Length (10.4)',
+    title: 'Polar Area & Length (4.4)',
     keywords: 'area sector length',
     items: [
       { label: 'Area', tex: r`A = \frac12\int_\alpha^\beta r^2\,d\theta` },

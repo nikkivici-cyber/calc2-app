@@ -150,7 +150,7 @@ function LessonCard({ item, label, secondary }: { item: PlanItem; label: string;
   const done = isLesson ? correctCount(item.lesson) : 0;
   const total = isLesson ? item.lesson.practice_questions.length : PRACTICE_SESSION_SIZE;
   const description = isLesson
-    ? `Section ${item.lesson.section} · concept, guided example, ${total} practice questions with worked solutions`
+    ? `Lesson ${item.lesson.number} · concept, guided example, ${total} practice questions with worked solutions`
     : `End-of-block review · ${total} mixed exam-style questions`;
   return (
     <Pressable

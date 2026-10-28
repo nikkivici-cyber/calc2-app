@@ -39,6 +39,7 @@ export function lesson(
   return {
     ...unit,
     subtopic_id: `sec_${o.section.replace('.', '_')}`,
+    number: '', // assigned by block position in content.ts
     section: o.section,
     title: o.title,
     overview: { formula: o.formula, key_takeaway: o.takeaway },

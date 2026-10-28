@@ -58,7 +58,7 @@ export default function CourseList({ onSelect, activeId, compact }: Props) {
                         style={[styles.rowTitle, compact && styles.rowTitleCompact]}
                         numberOfLines={compact ? 2 : undefined}
                       >
-                        {item.kind === 'lesson' && <Text style={styles.section}>{item.lesson.section} </Text>}
+                        {item.kind === 'lesson' && <Text style={styles.section}>{item.lesson.number} </Text>}
                         {item.title}
                       </Text>
                       {!compact && (

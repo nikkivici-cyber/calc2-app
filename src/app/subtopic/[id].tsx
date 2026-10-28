@@ -45,11 +45,11 @@ export default function SubtopicScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ title: isWide ? 'Calculus II' : `§${subtopic.section} ${subtopic.title}` }} />
+      <Stack.Screen options={{ title: isWide ? 'Calculus II' : `${subtopic.number} ${subtopic.title}` }} />
       <CourseShell activeId={subtopic.subtopic_id} kind="lesson">
         <ScrollView ref={scrollRef} style={{ flex: 1 }} contentContainerStyle={styles.container}>
           <Text style={styles.unitTitle}>
-            Day {day} · Section {subtopic.section}
+            Day {day} · Lesson {subtopic.number} · Textbook §{subtopic.section}
           </Text>
           <Text style={styles.topicTitle}>{subtopic.title}</Text>
           <View style={styles.lessonMeta}>

@@ -2,7 +2,8 @@
 
 Expo (SDK 58) + Expo Router app for Calculus II review, built around **one lesson a day**.
 
-Content follows the syllabus in 4 blocks: 27 lessons (one per textbook section: 5.5, 6.1–6.7, 7.1–7.8,
+Content follows the syllabus in 4 blocks: 27 lessons numbered by block (1.1–1.7, 2.1–2.6, 3.1–3.10, 4.1–4.4),
+one per textbook section (5.5, 6.1–6.7, 7.1–7.8,
 11.1–11.10, 10.1–10.4), each with a guided example and 5 practice questions with hints and full worked
 solutions, plus a 20-question **Block Practice** session at the end of each block (31 days in total).
 Midterm and final exams are marked in the course list.

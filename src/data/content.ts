@@ -22,12 +22,13 @@ export type PlanItem =
 
 export type Exam = { exam_id: string; title: string; covers: string; after_id: string };
 
+// Lessons are numbered by block: 1.1, 1.2, … 2.1, … 4.4.
 const BLOCKS = [
   { unit: BLOCK1, lessons: BLOCK1_LESSONS, practice: BLOCK1_PRACTICE },
   { unit: BLOCK2, lessons: BLOCK2_LESSONS, practice: BLOCK2_PRACTICE },
   { unit: BLOCK3, lessons: BLOCK3_LESSONS, practice: BLOCK3_PRACTICE },
   { unit: BLOCK4, lessons: BLOCK4_LESSONS, practice: BLOCK4_PRACTICE },
-];
+].map((b, i) => ({ ...b, lessons: b.lessons.map((l, j) => ({ ...l, number: `${i + 1}.${j + 1}` })) }));
 
 const SUBTOPICS: Subtopic[] = BLOCKS.flatMap((b) => b.lessons);
 
@@ -55,9 +56,9 @@ export const UNITS = BLOCKS.map((b) => ({
 
 // Exam dates from the syllabus, shown in the course list after the last item they cover.
 export const EXAMS: Exam[] = [
-  { exam_id: 'midterm_1', title: 'Midterm Exam 1', covers: '5.5, 6.1–6.5, 6.7, 7.1–7.2', after_id: 'sec_7_2' },
-  { exam_id: 'midterm_2', title: 'Midterm Exam 2', covers: '7.3–7.8, 11.1', after_id: 'sec_11_1' },
-  { exam_id: 'midterm_3', title: 'Midterm Exam 3', covers: '11.2–11.10', after_id: 'practice_block_3' },
+  { exam_id: 'midterm_1', title: 'Midterm Exam 1', covers: 'Lessons 1.1–1.7, 2.1–2.2', after_id: 'sec_7_2' },
+  { exam_id: 'midterm_2', title: 'Midterm Exam 2', covers: 'Lessons 2.3–2.6, 3.1', after_id: 'sec_11_1' },
+  { exam_id: 'midterm_3', title: 'Midterm Exam 3', covers: 'Lessons 3.2–3.10', after_id: 'practice_block_3' },
   { exam_id: 'final', title: 'Final Exam', covers: 'everything (comprehensive)', after_id: 'practice_block_4' },
 ];
 
@@ -78,7 +79,7 @@ export function getSession(id: string): PracticeSession | undefined {
 }
 
 export function itemLabel(item: PlanItem): string {
-  return item.kind === 'lesson' ? `§${item.lesson.section} ${item.title}` : item.title;
+  return item.kind === 'lesson' ? `${item.lesson.number} ${item.title}` : item.title;
 }
 
 export type QuestionWithSource = PracticeQuestion & { source_title: string; unit_title: string };
@@ -86,7 +87,7 @@ export type QuestionWithSource = PracticeQuestion & { source_title: string; unit
 // Master question list — the Bookmark Bank filters this by bookmarked ids.
 export const ALL_QUESTIONS: QuestionWithSource[] = [
   ...SUBTOPICS.flatMap((s) =>
-    s.practice_questions.map((q) => ({ ...q, source_title: `§${s.section} ${s.title}`, unit_title: s.unit_title })),
+    s.practice_questions.map((q) => ({ ...q, source_title: `${s.number} ${s.title}`, unit_title: s.unit_title })),
   ),
   ...SESSIONS.flatMap((s) => s.own_questions.map((q) => ({ ...q, source_title: s.title, unit_title: s.unit_title }))),
 ];

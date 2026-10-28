@@ -11,6 +11,7 @@ export type PracticeQuestion = {
 
 export type Subtopic = {
   subtopic_id: string;
+  number: string; // lesson number within the course, e.g. "2.1" (block 2, lesson 1)
   section: string; // textbook section, e.g. "7.1"
   title: string;
   unit_id: string;
