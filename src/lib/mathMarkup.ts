@@ -6,7 +6,9 @@ function escapeHtml(s: string): string {
 }
 
 export function toHtml(text: string): string {
-  return escapeHtml(text).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+  return escapeHtml(text)
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/\n/g, '<br>');
 }
 
 // Display equations wider than the screen are scaled down to fit (to a floor of 65%);

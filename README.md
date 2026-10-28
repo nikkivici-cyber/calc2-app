@@ -10,6 +10,7 @@ Midterm and final exams are marked in the course list.
 - **Today tab:** today's lesson, streak, and whether you're on track, ahead or behind the one-a-day plan.
 - **Daily reminder:** a local notification at the time you pick, only if today's lesson isn't finished yet.
   It's scheduled on the device, so no server or API key is needed (iOS/Android only).
+- **Formulas tab:** searchable formula sheet — trig identities plus every formula and technique in the syllabus.
 - **Course tab / iPad sidebar:** every lesson, so students can work ahead of the plan.
 - A lesson is **complete** once every practice question has been answered correctly (retries allowed).
 
@@ -33,6 +34,7 @@ npx expo start        # scan the QR code with Expo Go, or press w for web
 - `src/components/CourseList.tsx` — lesson list used by the Course tab and the iPad sidebar
 - `src/lib/bookmarks.tsx` — bookmarked ids, persisted with AsyncStorage
 - `src/data/lessons/block1-4.ts` — lessons; `src/data/lessons/practice.ts` — block practice questions
+- `src/data/formulas.ts` — formula sheet content (`src/app/(tabs)/formulas.tsx` renders it)
 - `src/data/content.ts` — assembles the daily plan (lessons + practice sessions) and exam markers
 - `src/app/practice/[id].tsx` — block practice session (20 questions, first-try score, new set)
 

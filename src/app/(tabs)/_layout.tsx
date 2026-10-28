@@ -40,9 +40,18 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="formulas"
+        options={{
+          title: 'Formulas',
+          headerTitle: 'Formula Sheet',
+          tabBarIcon: ({ focused }) => <TabIcon emoji="∑" focused={focused} />,
+        }}
+      />
+      <Tabs.Screen
         name="bookmarks"
         options={{
-          title: 'Bookmark Bank',
+          title: 'Bookmarks',
+          headerTitle: 'Bookmark Bank',
           tabBarBadge: bookmarkedIds.length || undefined,
           tabBarIcon: ({ focused }) => <TabIcon emoji="🔖" focused={focused} />,
         }}
