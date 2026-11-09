@@ -49,7 +49,9 @@ Note: on iOS/Android, KaTeX is loaded from the jsDelivr CDN, so math needs an in
 Reminders need a real device. They work in Expo Go for local notifications; for an App Store / TestFlight build use
 `npx eas-cli@latest build -p ios`.
 
-## Web preview
+## Website (Netlify)
 
-`node scripts/build-web-single.mjs` builds the whole app into one self-contained file, `dist-single/index.html`
-(JS, KaTeX CSS and fonts inlined). Open it in a browser or host it anywhere. Reminders don't run on the web.
+`npm run build:web` builds the static site into `dist-single/`: one self-contained `index.html`
+(JS, KaTeX CSS and fonts inlined) plus home-screen icons and a web app manifest.
+`netlify.toml` tells Netlify to run that build and serve `dist-single/`, so a Netlify site linked to this
+repo redeploys on every push. Reminders don't run on the web.

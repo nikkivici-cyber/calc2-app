@@ -1,8 +1,9 @@
 // Builds the web version as ONE self-contained HTML file (JS, CSS, KaTeX fonts and
-// images inlined), so it can be opened or hosted anywhere without a server setup.
-//   node scripts/build-web-single.mjs   →   dist-single/index.html
+// images inlined), plus home-screen icons and a web app manifest, so it can be hosted
+// anywhere as static files (Netlify uses this via netlify.toml).
+//   node scripts/build-web-single.mjs   →   dist-single/
 import { execSync } from 'node:child_process';
-import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { copyFileSync, mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { createRequire } from 'node:module';
 
@@ -33,6 +34,46 @@ html = html.replace(/<script src="([^"]+)"[^>]*><\/script>/g, (_, src) => {
   return `<script>${js.replace(/<\/script/gi, '<\\/script')}</script>`;
 });
 
+// Home-screen ("Add to Home Screen") support: icon, full-screen launch, web app manifest.
+const APP_NAME = 'Calc II Daily';
+const THEME = '#4F46E5';
+html = html.replace(
+  '</head>',
+  [
+    `<link rel="apple-touch-icon" href="apple-touch-icon.png">`,
+    `<link rel="icon" type="image/png" href="icon-192.png">`,
+    `<link rel="manifest" href="manifest.webmanifest">`,
+    `<meta name="apple-mobile-web-app-capable" content="yes">`,
+    `<meta name="mobile-web-app-capable" content="yes">`,
+    `<meta name="apple-mobile-web-app-status-bar-style" content="default">`,
+    `<meta name="apple-mobile-web-app-title" content="${APP_NAME}">`,
+    `<meta name="theme-color" content="${THEME}">`,
+    '</head>',
+  ].join('\n'),
+);
+
 mkdirSync('dist-single', { recursive: true });
 writeFileSync('dist-single/index.html', html);
+for (const icon of ['apple-touch-icon.png', 'icon-192.png', 'icon-512.png']) {
+  copyFileSync(join('assets/web', icon), join('dist-single', icon));
+}
+writeFileSync(
+  'dist-single/manifest.webmanifest',
+  JSON.stringify(
+    {
+      name: APP_NAME,
+      short_name: APP_NAME,
+      start_url: '/',
+      display: 'standalone',
+      background_color: '#F5F7FA',
+      theme_color: THEME,
+      icons: [
+        { src: 'icon-192.png', sizes: '192x192', type: 'image/png' },
+        { src: 'icon-512.png', sizes: '512x512', type: 'image/png' },
+      ],
+    },
+    null,
+    2,
+  ),
+);
 console.log(`dist-single/index.html (${(html.length / 1024).toFixed(0)} KB)`);

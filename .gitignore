@@ -43,3 +43,4 @@ yarn-error.*
 # web builds
 dist/
 dist-single/
+calc2-daily-website.zip

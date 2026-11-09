@@ -1,0 +1,13 @@
+# Netlify: build the static web version and serve it as a single-page app.
+[build]
+  command = "npm run build:web"
+  publish = "dist-single"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Every path loads the app (so refreshing inside a lesson works).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
