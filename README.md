@@ -4,7 +4,7 @@ Expo (SDK 58) + Expo Router app for Calculus II review, built around **one lesso
 
 Content follows the syllabus in 4 blocks: 27 lessons numbered by block (1.1–1.7, 2.1–2.6, 3.1–3.10, 4.1–4.4),
 one per textbook section (5.5, 6.1–6.7, 7.1–7.8,
-11.1–11.10, 10.1–10.4), each with a guided example and 5 practice questions with hints and full worked
+11.1–11.10, 10.1–10.4), each with a guided example and 10 practice questions with hints and full worked
 solutions, plus a 20-question **Block Practice** session at the end of each block (31 days in total).
 Midterm and final exams are marked in the course list.
 
@@ -34,7 +34,7 @@ npx expo start        # scan the QR code with Expo Go, or press w for web
 - `src/lib/reminders.ts` — keeps a rolling week of local reminders in sync with progress
 - `src/components/CourseList.tsx` — lesson list used by the Course tab and the iPad sidebar
 - `src/lib/bookmarks.tsx` — bookmarked ids, persisted with AsyncStorage
-- `src/data/lessons/block1-4.ts` — lessons; `src/data/lessons/practice.ts` — block practice questions
+- `src/data/lessons/block1-4.ts` — lesson text and guided examples; `src/data/questions/block1-4.ts` — the 10 practice questions per lesson; `src/data/lessons/practice.ts` — block practice questions
 - `src/data/formulas.ts` — formula sheet content (`src/app/(tabs)/formulas.tsx` renders it)
 - `src/data/content.ts` — assembles the daily plan (lessons + practice sessions) and exam markers
 - `src/app/practice/[id].tsx` — block practice session (20 questions, first-try score, new set)

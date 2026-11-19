@@ -1,4 +1,5 @@
-import { lesson, mc, r, type UnitInfo } from '../build';
+import { lesson, r, type UnitInfo } from '../build';
+import { BLOCK3_QUESTIONS } from '../questions/block3';
 
 export const BLOCK3: UnitInfo = {
   unit_id: 'block_3',
@@ -22,69 +23,7 @@ export const BLOCK3_LESSONS = [
         r`**Shortcut:** when the degrees are equal, the limit is the ratio of leading coefficients: $\frac35$. (Top degree smaller ⟹ $0$; top degree bigger ⟹ diverges.)`,
       ],
     },
-    questions: [
-      mc({
-        id: 's11_1_q1',
-        question: r`Find $$\lim_{n\to\infty}\frac{2n + 3}{5n - 1}$$`,
-        answer: r`$\frac25$`,
-        wrong: [r`$0$`, r`$-3$`, r`Diverges`],
-        hint: r`Divide top and bottom by $n$.`,
-        solution: [
-          r`Divide by $n$: $\frac{2 + 3/n}{5 - 1/n}$.`,
-          r`$\frac3n \to 0$ and $\frac1n \to 0$.`,
-          r`Limit $= \frac{2}{5}$.`,
-        ],
-      }),
-      mc({
-        id: 's11_1_q2',
-        question: r`Find $$\lim_{n\to\infty}\frac{\ln n}{n}$$`,
-        answer: r`$0$`,
-        wrong: [r`$1$`, r`Diverges to $\infty$`, r`$e$`],
-        hint: r`Consider $f(x) = \frac{\ln x}{x}$ and apply L'Hôpital's rule.`,
-        solution: [
-          r`Let $f(x) = \frac{\ln x}{x}$. As $x\to\infty$ it's $\frac\infty\infty$, so L'Hôpital applies.`,
-          r`$\lim_{x\to\infty}\frac{\ln x}{x} = \lim_{x\to\infty}\frac{1/x}{1} = 0$.`,
-          r`Since $a_n = f(n)$, the sequence also has limit $0$. (Logs grow slower than any power of $n$.)`,
-        ],
-      }),
-      mc({
-        id: 's11_1_q3',
-        question: r`Find $$\lim_{n\to\infty}\frac{(-1)^n}{n}$$`,
-        answer: r`$0$`,
-        wrong: [r`Diverges (it oscillates)`, r`$1$`, r`$-1$`],
-        hint: r`Squeeze it between $-\frac1n$ and $\frac1n$.`,
-        solution: [
-          r`$(-1)^n$ is always $\pm1$, so $-\frac1n \le \frac{(-1)^n}{n} \le \frac1n$.`,
-          r`Both $-\frac1n \to 0$ and $\frac1n \to 0$.`,
-          r`By the Squeeze Theorem, $\frac{(-1)^n}{n} \to 0$. The signs alternate, but the size shrinks to $0$, so it converges.`,
-        ],
-      }),
-      mc({
-        id: 's11_1_q4',
-        question: r`Find $$\lim_{n\to\infty}\left(1 + \frac{2}{n}\right)^n$$`,
-        answer: r`$e^2$`,
-        wrong: [r`$1$`, r`$e$`, r`$2e$`],
-        hint: r`Use $\lim\left(1 + \frac an\right)^n = e^a$, or take $\ln$ of both sides.`,
-        solution: [
-          r`This is a $1^\infty$ form — "$1$ to any power is $1$" is wrong here.`,
-          r`Let $y = \left(1 + \frac2n\right)^n$. Then $\ln y = n\ln\left(1 + \frac2n\right) = \frac{\ln(1 + 2/n)}{1/n}$.`,
-          r`With $x = \frac1n \to 0$: $\frac{\ln(1 + 2x)}{x} \to \frac{2/(1 + 2x)}{1}\Big|_{x=0} = 2$ (L'Hôpital).`,
-          r`So $\ln y \to 2$, hence $y \to e^2$. (Matches $e^a$ with $a = 2$.)`,
-        ],
-      }),
-      mc({
-        id: 's11_1_q5',
-        question: r`Find $$\lim_{n\to\infty}\frac{2^n}{n!}$$`,
-        answer: r`$0$`,
-        wrong: [r`Diverges to $\infty$`, r`$1$`, r`$2$`],
-        hint: r`Compare consecutive terms: $\frac{a_{n+1}}{a_n} = \frac{2}{n + 1}$.`,
-        solution: [
-          r`Ratio of consecutive terms: $\frac{a_{n+1}}{a_n} = \frac{2^{n+1}}{(n+1)!}\cdot\frac{n!}{2^n} = \frac{2}{n + 1}$.`,
-          r`For $n \ge 3$ that ratio is at most $\frac12$, so each term is at most half of the previous one.`,
-          r`Repeated halving drives the terms to $0$. (Factorials beat exponentials.)`,
-        ],
-      }),
-    ],
+    questions: BLOCK3_QUESTIONS['11.1'],
   }),
 
   // ─────────────────────────── 11.2 ───────────────────────────
@@ -103,69 +42,7 @@ export const BLOCK3_LESSONS = [
         r`**Take the limit:** $$S = \lim_{N\to\infty}\left(1 - \frac{1}{N+1}\right) = 1$$ The series converges to $1$.`,
       ],
     },
-    questions: [
-      mc({
-        id: 's11_2_q1',
-        question: r`Find the sum: $$\sum_{n=0}^\infty\left(\frac23\right)^n$$`,
-        answer: r`$3$`,
-        wrong: [r`$2$`, r`$\frac32$`, r`Diverges`],
-        hint: r`First term at $n = 0$ is $1$; ratio $\frac23$.`,
-        solution: [
-          r`Geometric: first term $a = \left(\frac23\right)^0 = 1$, ratio $r = \frac23$.`,
-          r`$|r| < 1$, so it converges.`,
-          r`Sum $= \frac{a}{1 - r} = \frac{1}{1 - 2/3} = \frac{1}{1/3} = 3$.`,
-        ],
-      }),
-      mc({
-        id: 's11_2_q2',
-        question: r`Find the sum: $$\sum_{n=1}^\infty 5\left(\frac14\right)^n$$`,
-        answer: r`$\frac53$`,
-        wrong: [r`$\frac{20}{3}$`, r`$\frac54$`, r`$\frac43$`],
-        hint: r`Careful: the sum starts at $n = 1$, so the first term is $5\cdot\frac14$.`,
-        solution: [
-          r`First term (at $n = 1$): $5\cdot\frac14 = \frac54$. Ratio $r = \frac14$.`,
-          r`Sum $= \frac{5/4}{1 - 1/4} = \frac{5/4}{3/4} = \frac53$.`,
-          r`Trap: using $a = 5$ (as if starting at $n = 0$) gives $\frac{5}{3/4} = \frac{20}{3}$.`,
-        ],
-      }),
-      mc({
-        id: 's11_2_q3',
-        question: r`Find the sum: $$\sum_{n=0}^\infty\frac{3^n}{2^n}$$`,
-        answer: r`Diverges`,
-        wrong: [r`$-2$`, r`$2$`, r`$3$`],
-        hint: r`What is the ratio?`,
-        solution: [
-          r`$\frac{3^n}{2^n} = \left(\frac32\right)^n$ — geometric with $r = \frac32$.`,
-          r`$|r| = 1.5 \ge 1$, so the series **diverges** (the terms don't even go to $0$).`,
-          r`Trap: blindly using $\frac{1}{1 - r} = \frac{1}{1 - 1.5} = -2$. A sum of positive terms can't be negative.`,
-        ],
-      }),
-      mc({
-        id: 's11_2_q4',
-        question: r`Find the sum: $$\sum_{n=1}^\infty\left(\frac1n - \frac{1}{n + 2}\right)$$`,
-        answer: r`$\frac32$`,
-        wrong: [r`$1$`, r`$2$`, r`Diverges`],
-        hint: r`Write out the first several terms. Cancellation skips one term each time.`,
-        solution: [
-          r`$S_N = \left(1 - \tfrac13\right) + \left(\tfrac12 - \tfrac14\right) + \left(\tfrac13 - \tfrac15\right) + \left(\tfrac14 - \tfrac16\right) + \cdots + \left(\tfrac1N - \tfrac{1}{N+2}\right)$.`,
-          r`Each $-\frac{1}{k}$ cancels with the $+\frac1k$ two terms later.`,
-          r`Survivors: the first two positives $1 + \frac12$ and the last two negatives: $S_N = 1 + \frac12 - \frac{1}{N+1} - \frac{1}{N+2}$.`,
-          r`As $N\to\infty$: $S = \frac32$.`,
-        ],
-      }),
-      mc({
-        id: 's11_2_q5',
-        question: r`Write the repeating decimal $0.\overline{7} = 0.777\ldots$ as a fraction.`,
-        answer: r`$\frac79$`,
-        wrong: [r`$\frac{7}{10}$`, r`$\frac{77}{100}$`, r`$\frac{7}{99}$`],
-        hint: r`$0.777\ldots = \frac{7}{10} + \frac{7}{100} + \frac{7}{1000} + \cdots$`,
-        solution: [
-          r`$0.777\ldots = \sum_{n=1}^\infty\frac{7}{10^n}$: geometric with first term $\frac{7}{10}$ and ratio $\frac{1}{10}$.`,
-          r`Sum $= \frac{7/10}{1 - 1/10} = \frac{7/10}{9/10} = \frac79$.`,
-          r`Check: $7 \div 9 = 0.777\ldots$ ✓`,
-        ],
-      }),
-    ],
+    questions: BLOCK3_QUESTIONS['11.2'],
   }),
 
   // ─────────────────────────── 11.3 ───────────────────────────
@@ -185,71 +62,7 @@ export const BLOCK3_LESSONS = [
         r`**Conclude:** the integral diverges, so by the Integral Test the series **diverges**.`,
       ],
     },
-    questions: [
-      mc({
-        id: 's11_3_q1',
-        question: r`Does $$\sum_{n=1}^\infty\frac{n}{n + 1}$$ converge?`,
-        answer: r`Diverges (Divergence Test)`,
-        wrong: [r`Converges (p-series)`, r`Converges to $1$`, r`The Divergence Test is inconclusive`],
-        hint: r`What do the terms approach?`,
-        solution: [
-          r`$\lim_{n\to\infty}\frac{n}{n + 1} = 1$.`,
-          r`$1 \ne 0$, so by the Divergence Test the series diverges.`,
-          r`Adding infinitely many terms close to $1$ can't give a finite sum.`,
-        ],
-      }),
-      mc({
-        id: 's11_3_q2',
-        question: r`Does $$\sum_{n=1}^\infty\frac{1}{\sqrt n}$$ converge?`,
-        answer: r`Diverges (p-series with $p = \frac12 \le 1$)`,
-        wrong: [r`Converges (p-series with $p = \frac12 < 1$)`, r`Converges because $\frac{1}{\sqrt n} \to 0$`, r`Diverges by the Divergence Test`],
-        hint: r`Write it as $\frac{1}{n^p}$. Which values of $p$ converge?`,
-        solution: [
-          r`$\frac{1}{\sqrt n} = \frac{1}{n^{1/2}}$: a p-series with $p = \frac12$.`,
-          r`p-series converge only for $p > 1$. Here $p \le 1$, so it **diverges**.`,
-          r`Note: the Divergence Test does **not** apply (terms do go to $0$), and "terms $\to 0$" never proves convergence.`,
-        ],
-      }),
-      mc({
-        id: 's11_3_q3',
-        question: r`Does $$\sum_{n=1}^\infty n e^{-n^2}$$ converge?`,
-        answer: r`Converges (Integral Test)`,
-        wrong: [r`Diverges (Integral Test)`, r`Converges, and its sum is $\frac{1}{2e}$`, r`Diverges (Divergence Test)`],
-        hint: r`$\int x e^{-x^2}\,dx$ is a simple $u$-substitution.`,
-        solution: [
-          r`$f(x) = xe^{-x^2}$ is positive, continuous, and decreasing for $x \ge 1$.`,
-          r`$\int_1^\infty xe^{-x^2}\,dx$: let $u = x^2$, $du = 2x\,dx$: $= \lim_{t\to\infty}\left[-\frac12e^{-x^2}\right]_1^t = 0 + \frac{1}{2e} = \frac{1}{2e}$.`,
-          r`The integral is finite, so the series **converges**.`,
-          r`Trap: $\frac{1}{2e}$ is the integral's value, **not** the sum of the series.`,
-        ],
-      }),
-      mc({
-        id: 's11_3_q4',
-        question: r`The harmonic series $\sum_{n=1}^\infty\frac1n$ has terms that approach $0$. Does it converge?`,
-        answer: r`No — it diverges`,
-        wrong: [r`Yes, because $\frac1n \to 0$`, r`Yes, it converges to $\ln 2$`, r`The Integral Test is inconclusive`],
-        hint: r`Compare to $\int_1^\infty\frac{dx}{x}$.`,
-        solution: [
-          r`$f(x) = \frac1x$ is positive, continuous, decreasing.`,
-          r`$\int_1^\infty\frac{dx}{x} = \lim_{t\to\infty}\ln t = \infty$ — diverges.`,
-          r`So $\sum\frac1n$ **diverges**. It's the classic example that $a_n \to 0$ is necessary but not sufficient.`,
-          r`(The *alternating* harmonic series $\sum\frac{(-1)^{n+1}}{n}$ is the one that converges to $\ln 2$.)`,
-        ],
-      }),
-      mc({
-        id: 's11_3_q5',
-        question: r`For which values of $p$ does $$\sum_{n=1}^\infty\frac{1}{n^p}$$ converge?`,
-        answer: r`$p > 1$`,
-        wrong: [r`$p \ge 1$`, r`$p < 1$`, r`$p > 0$`],
-        hint: r`Apply the integral test to $\int_1^\infty x^{-p}\,dx$.`,
-        solution: [
-          r`$\int_1^\infty x^{-p}\,dx = \lim_{t\to\infty}\frac{t^{1-p} - 1}{1 - p}$ for $p \ne 1$.`,
-          r`If $p > 1$: $1 - p < 0$, so $t^{1-p} \to 0$ — finite ⟹ converges.`,
-          r`If $p < 1$: $t^{1-p} \to \infty$ ⟹ diverges. If $p = 1$: $\ln t \to \infty$ ⟹ diverges.`,
-          r`Answer: converges exactly when $p > 1$.`,
-        ],
-      }),
-    ],
+    questions: BLOCK3_QUESTIONS['11.3'],
   }),
 
   // ─────────────────────────── 11.4 ───────────────────────────
@@ -268,70 +81,7 @@ export const BLOCK3_LESSONS = [
         r`**Conclude:** $\sum\frac{1}{n^2}$ converges, so $\sum\frac{n + 1}{n^3 + 2}$ **converges** too.`,
       ],
     },
-    questions: [
-      mc({
-        id: 's11_4_q1',
-        question: r`Does $$\sum_{n=1}^\infty\frac{1}{n^2 + 1}$$ converge?`,
-        answer: r`Converges (compare with $\sum\frac{1}{n^2}$)`,
-        wrong: [r`Diverges (compare with $\sum\frac1n$)`, r`Diverges (Divergence Test)`, r`Converges to $\frac{\pi}{4}$`],
-        hint: r`$n^2 + 1 > n^2$, so $\frac{1}{n^2 + 1} < \frac{1}{n^2}$.`,
-        solution: [
-          r`$0 < \frac{1}{n^2 + 1} < \frac{1}{n^2}$ for all $n \ge 1$.`,
-          r`$\sum\frac{1}{n^2}$ converges (p-series, $p = 2$).`,
-          r`Smaller than a convergent series ⟹ **converges** (Direct Comparison).`,
-        ],
-      }),
-      mc({
-        id: 's11_4_q2',
-        question: r`Does $$\sum_{n=1}^\infty\frac{1}{2n + 5}$$ converge?`,
-        answer: r`Diverges (Limit Comparison with $\sum\frac1n$)`,
-        wrong: [r`Converges because $\frac{1}{2n + 5} < \frac1n$`, r`Converges (geometric)`, r`Diverges (Divergence Test)`],
-        hint: r`For large $n$, $\frac{1}{2n + 5} \approx \frac{1}{2n}$.`,
-        solution: [
-          r`Compare with $b_n = \frac1n$: $\lim\frac{1/(2n+5)}{1/n} = \lim\frac{n}{2n + 5} = \frac12$.`,
-          r`$0 < \frac12 < \infty$, and $\sum\frac1n$ diverges.`,
-          r`So $\sum\frac{1}{2n + 5}$ **diverges**.`,
-          r`Trap: "smaller than a divergent series" proves nothing — that's why direct comparison with $\frac1n$ fails here.`,
-        ],
-      }),
-      mc({
-        id: 's11_4_q3',
-        question: r`Does $$\sum_{n=1}^\infty\frac{1}{3^n + 1}$$ converge?`,
-        answer: r`Converges (compare with $\sum\left(\frac13\right)^n$)`,
-        wrong: [r`Diverges (compare with $\sum\frac1n$)`, r`Converges to $\frac12$`, r`Diverges (Divergence Test)`],
-        hint: r`$\frac{1}{3^n + 1} < \frac{1}{3^n}$.`,
-        solution: [
-          r`$0 < \frac{1}{3^n + 1} < \frac{1}{3^n} = \left(\frac13\right)^n$.`,
-          r`$\sum\left(\frac13\right)^n$ is geometric with $|r| = \frac13 < 1$ — converges.`,
-          r`By Direct Comparison, the series **converges**. (Comparison doesn't give the exact sum.)`,
-        ],
-      }),
-      mc({
-        id: 's11_4_q4',
-        question: r`To test $$\sum_{n=1}^\infty\frac{2n^2 + 1}{n^4 + n}$$ with the Limit Comparison Test, which $b_n$ is the best choice?`,
-        answer: r`$\frac{1}{n^2}$`,
-        wrong: [r`$\frac1n$`, r`$\frac{1}{n^4}$`, r`$2n^2$`],
-        hint: r`Keep only the highest power on top and on the bottom.`,
-        solution: [
-          r`Dominant terms: top $2n^2$, bottom $n^4$. So $a_n \approx \frac{2n^2}{n^4} = \frac{2}{n^2}$.`,
-          r`Drop the constant: $b_n = \frac{1}{n^2}$.`,
-          r`Check: $\lim\frac{a_n}{b_n} = \lim\frac{2n^4 + n^2}{n^4 + n} = 2$ — positive and finite.`,
-          r`Since $\sum\frac1{n^2}$ converges, the original series converges.`,
-        ],
-      }),
-      mc({
-        id: 's11_4_q5',
-        question: r`Does $$\sum_{n=1}^\infty\frac{1}{n + \sqrt n}$$ converge?`,
-        answer: r`Diverges (Limit Comparison with $\sum\frac1n$)`,
-        wrong: [r`Converges because $\frac{1}{n + \sqrt n} < \frac1n$`, r`Converges (p-series with $p = \frac32$)`, r`Diverges (Divergence Test)`],
-        hint: r`For large $n$, $n$ dominates $\sqrt n$.`,
-        solution: [
-          r`$\frac{1}{n + \sqrt n} < \frac1n$ is true, but being smaller than a **divergent** series proves nothing.`,
-          r`Use LCT with $b_n = \frac1n$: $\lim\frac{n}{n + \sqrt n} = \lim\frac{1}{1 + 1/\sqrt n} = 1$.`,
-          r`$c = 1 > 0$ and $\sum\frac1n$ diverges ⟹ the series **diverges**.`,
-        ],
-      }),
-    ],
+    questions: BLOCK3_QUESTIONS['11.4'],
   }),
 
   // ─────────────────────────── 11.5 ───────────────────────────
@@ -351,71 +101,7 @@ export const BLOCK3_LESSONS = [
         r`**Error bound:** the first omitted term is $b_5 = \frac15$, so $|S - S_4| \le 0.2$. (Actual error: $0.693 - 0.583 \approx 0.11$ ✓)`,
       ],
     },
-    questions: [
-      mc({
-        id: 's11_5_q1',
-        question: r`Does $$\sum_{n=1}^\infty\frac{(-1)^n}{\sqrt n}$$ converge?`,
-        answer: r`Converges (Alternating Series Test)`,
-        wrong: [r`Diverges, because $\sum\frac{1}{\sqrt n}$ diverges`, r`Diverges (Divergence Test)`, r`Converges absolutely`],
-        hint: r`Check the two AST conditions for $b_n = \frac{1}{\sqrt n}$.`,
-        solution: [
-          r`$b_n = \frac{1}{\sqrt n}$ is positive and decreasing.`,
-          r`$b_n \to 0$.`,
-          r`By the AST the series **converges**.`,
-          r`It does **not** converge absolutely ($\sum\frac{1}{\sqrt n}$ diverges), so it's conditionally convergent — but it still converges.`,
-        ],
-      }),
-      mc({
-        id: 's11_5_q2',
-        question: r`Does $$\sum_{n=1}^\infty\frac{(-1)^n n}{n + 1}$$ converge?`,
-        answer: r`Diverges (Divergence Test)`,
-        wrong: [r`Converges (Alternating Series Test)`, r`Converges to $0$`, r`Converges absolutely`],
-        hint: r`What does $b_n = \frac{n}{n + 1}$ approach?`,
-        solution: [
-          r`$b_n = \frac{n}{n + 1} \to 1$, not $0$. The AST does **not** apply.`,
-          r`So the terms $(-1)^n\frac{n}{n+1}$ keep jumping near $+1$ and $-1$ — they don't approach $0$.`,
-          r`By the Divergence Test, the series **diverges**.`,
-        ],
-      }),
-      mc({
-        id: 's11_5_q3',
-        question: r`Using $S_9$ to approximate $$S = \sum_{n=1}^\infty\frac{(-1)^{n+1}}{n^2},$$ what is the best error bound from the AST?`,
-        answer: r`$|S - S_9| \le \frac{1}{100}$`,
-        wrong: [r`$|S - S_9| \le \frac{1}{81}$`, r`$|S - S_9| \le \frac{1}{10}$`, r`$|S - S_9| \le \frac19$`],
-        hint: r`The bound is the first term you **didn't** use.`,
-        solution: [
-          r`$S_9$ uses terms $n = 1, \ldots, 9$.`,
-          r`The first omitted term is $n = 10$: $b_{10} = \frac{1}{10^2} = \frac{1}{100}$.`,
-          r`So $|S - S_9| \le \frac{1}{100}$. ($\frac{1}{81}$ is the last term *used*.)`,
-        ],
-      }),
-      mc({
-        id: 's11_5_q4',
-        question: r`How many terms of $$\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n^3}$$ are needed to guarantee an error less than $0.0005$?`,
-        answer: r`$12$`,
-        wrong: [r`$13$`, r`$11$`, r`$2000$`],
-        hint: r`Need $b_{N+1} = \frac{1}{(N+1)^3} < 0.0005$.`,
-        solution: [
-          r`Error after $N$ terms $\le \frac{1}{(N+1)^3}$. Need $\frac{1}{(N+1)^3} < 0.0005 = \frac{1}{2000}$.`,
-          r`So $(N + 1)^3 > 2000$.`,
-          r`$12^3 = 1728$ (too small), $13^3 = 2197$ ✓. So $N + 1 = 13$.`,
-          r`$N = 12$ terms.`,
-        ],
-      }),
-      mc({
-        id: 's11_5_q5',
-        question: r`For $S = \sum_{n=1}^\infty\frac{(-1)^{n+1}}{2n - 1} = 1 - \frac13 + \frac15 - \cdots$, the partial sum is $S_3 = 1 - \frac13 + \frac15$. Which is true?`,
-        answer: r`$S_3$ overestimates $S$, with error at most $\frac17$`,
-        wrong: [r`$S_3$ underestimates $S$, with error at most $\frac17$`, r`$S_3$ overestimates $S$, with error at most $\frac15$`, r`$S_3 = S$ exactly`],
-        hint: r`The next term after $S_3$ is $-\frac17$.`,
-        solution: [
-          r`The next (omitted) term is $-\frac17$, so the error bound is $b_4 = \frac17$.`,
-          r`$S_3$ ends by **adding** $\frac15$; the next step subtracts $\frac17$. The partial sums zig-zag around $S$, so $S_4 < S < S_3$.`,
-          r`So $S_3$ is an **overestimate** with error at most $\frac17$.`,
-          r`(This series equals $\frac\pi4 \approx 0.785$; $S_3 = \frac{13}{15} \approx 0.867$.)`,
-        ],
-      }),
-    ],
+    questions: BLOCK3_QUESTIONS['11.5'],
   }),
 
   // ─────────────────────────── 11.6 ───────────────────────────
@@ -435,67 +121,7 @@ export const BLOCK3_LESSONS = [
         r`**Conclude:** $L = \frac12 < 1$ ⟹ the series **converges absolutely**.`,
       ],
     },
-    questions: [
-      mc({
-        id: 's11_6_q1',
-        question: r`Does $$\sum_{n=1}^\infty\frac{n!}{10^n}$$ converge?`,
-        answer: r`Diverges (Ratio Test, $L = \infty$)`,
-        wrong: [r`Converges (Ratio Test, $L = \frac{1}{10}$)`, r`Ratio Test is inconclusive`, r`Converges (geometric)`],
-        hint: r`$\frac{(n+1)!}{n!} = n + 1$.`,
-        solution: [
-          r`$\frac{a_{n+1}}{a_n} = \frac{(n+1)!}{10^{n+1}}\cdot\frac{10^n}{n!} = \frac{n + 1}{10}$.`,
-          r`$\lim\frac{n + 1}{10} = \infty > 1$.`,
-          r`The series **diverges**. (Factorials eventually beat any exponential.)`,
-        ],
-      }),
-      mc({
-        id: 's11_6_q2',
-        question: r`Does $$\sum_{n=1}^\infty\left(\frac{n}{2n + 1}\right)^n$$ converge?`,
-        answer: r`Converges absolutely (Root Test, $L = \frac12$)`,
-        wrong: [r`Diverges (Root Test, $L = 2$)`, r`Root Test is inconclusive ($L = 1$)`, r`Diverges (Divergence Test)`],
-        hint: r`The whole term is to the $n$th power — take the $n$th root.`,
-        solution: [
-          r`$\sqrt[n]{|a_n|} = \frac{n}{2n + 1}$ (the $n$th root cancels the $n$th power).`,
-          r`$\lim\frac{n}{2n + 1} = \frac12$.`,
-          r`$L = \frac12 < 1$ ⟹ **converges absolutely**.`,
-        ],
-      }),
-      mc({
-        id: 's11_6_q3',
-        question: r`Classify $$\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}$$`,
-        answer: r`Conditionally convergent`,
-        wrong: [r`Absolutely convergent`, r`Divergent`, r`Ratio Test shows convergence`],
-        hint: r`Test $\sum|a_n|$ and $\sum a_n$ separately.`,
-        solution: [
-          r`$\sum|a_n| = \sum\frac1n$ — the harmonic series, which **diverges**. So not absolutely convergent.`,
-          r`$\sum a_n$ itself converges by the AST ($\frac1n$ decreases to $0$).`,
-          r`Converges, but not absolutely ⟹ **conditionally convergent**.`,
-        ],
-      }),
-      mc({
-        id: 's11_6_q4',
-        question: r`Classify $$\sum_{n=1}^\infty\frac{(-1)^n}{n^2}$$`,
-        answer: r`Absolutely convergent`,
-        wrong: [r`Conditionally convergent`, r`Divergent`, r`Converges only by the AST`],
-        hint: r`What is $\sum\left|\frac{(-1)^n}{n^2}\right|$?`,
-        solution: [
-          r`$\sum|a_n| = \sum\frac{1}{n^2}$ — p-series with $p = 2 > 1$, converges.`,
-          r`So the series is **absolutely convergent** (and therefore convergent).`,
-        ],
-      }),
-      mc({
-        id: 's11_6_q5',
-        question: r`What does the Ratio Test say about $$\sum_{n=1}^\infty\frac{1}{n^2}\ ?$$`,
-        answer: r`$L = 1$, so the test is inconclusive`,
-        wrong: [r`$L = 1$, so the series converges`, r`$L = 0$, so the series converges`, r`$L = 1$, so the series diverges`],
-        hint: r`Compute $\frac{n^2}{(n+1)^2}$ as $n\to\infty$.`,
-        solution: [
-          r`$\frac{a_{n+1}}{a_n} = \frac{n^2}{(n + 1)^2} = \left(\frac{n}{n + 1}\right)^2 \to 1$.`,
-          r`$L = 1$ ⟹ the Ratio Test gives **no information**.`,
-          r`(We know it converges from the p-series test. $\sum\frac1n$ also gives $L = 1$ but diverges — which is why $L = 1$ can't decide.)`,
-        ],
-      }),
-    ],
+    questions: BLOCK3_QUESTIONS['11.6'],
   }),
 
   // ─────────────────────────── 11.7 ───────────────────────────
@@ -515,70 +141,7 @@ export const BLOCK3_LESSONS = [
         r`**Conclude:** converges by AST, but not absolutely ⟹ **conditionally convergent**.`,
       ],
     },
-    questions: [
-      mc({
-        id: 's11_7_q1',
-        question: r`Which test is most natural for $$\sum_{n=1}^\infty\frac{3^n}{n!}\ ?$$`,
-        answer: r`Ratio Test`,
-        wrong: [r`Integral Test`, r`Alternating Series Test`, r`p-series test`],
-        hint: r`Factorials.`,
-        solution: [
-          r`Factorials (and exponentials) cancel beautifully in $\frac{a_{n+1}}{a_n}$ ⟹ Ratio Test.`,
-          r`$\frac{a_{n+1}}{a_n} = \frac{3^{n+1}}{(n+1)!}\cdot\frac{n!}{3^n} = \frac{3}{n + 1} \to 0 < 1$ ⟹ converges absolutely.`,
-          r`(You can't integrate $\frac{3^x}{x!}$ — factorials aren't defined for non-integers in this course.)`,
-        ],
-      }),
-      mc({
-        id: 's11_7_q2',
-        question: r`Does $$\sum_{n=1}^\infty\left(\frac{2n}{n + 5}\right)^n$$ converge?`,
-        answer: r`Diverges (Root Test, $L = 2$)`,
-        wrong: [r`Converges (Root Test, $L = 2$)`, r`Converges (Ratio Test)`, r`Inconclusive`],
-        hint: r`Take the $n$th root of the terms.`,
-        solution: [
-          r`$\sqrt[n]{a_n} = \frac{2n}{n + 5} \to 2$.`,
-          r`$L = 2 > 1$ ⟹ **diverges**.`,
-          r`(The terms themselves blow up, so the Divergence Test also works.)`,
-        ],
-      }),
-      mc({
-        id: 's11_7_q3',
-        question: r`Does $$\sum_{n=1}^\infty\frac{n^2}{n^3 + 1}$$ converge?`,
-        answer: r`Diverges (Limit Comparison with $\sum\frac1n$)`,
-        wrong: [r`Converges (Limit Comparison with $\sum\frac{1}{n^2}$)`, r`Converges (Ratio Test)`, r`Diverges (Divergence Test)`],
-        hint: r`Dominant terms: $\frac{n^2}{n^3}$.`,
-        solution: [
-          r`$\frac{n^2}{n^3 + 1} \approx \frac{n^2}{n^3} = \frac1n$.`,
-          r`LCT: $\lim\frac{n^2}{n^3 + 1}\cdot n = \lim\frac{n^3}{n^3 + 1} = 1$.`,
-          r`$\sum\frac1n$ diverges ⟹ the series **diverges**.`,
-          r`(The terms do go to $0$, so the Divergence Test doesn't apply; the Ratio Test gives $L = 1$.)`,
-        ],
-      }),
-      mc({
-        id: 's11_7_q4',
-        question: r`Does $$\sum_{n=1}^\infty\frac{\sin^2 n}{n^2}$$ converge?`,
-        answer: r`Converges (Direct Comparison with $\sum\frac{1}{n^2}$)`,
-        wrong: [r`Diverges (oscillating terms)`, r`Converges (Alternating Series Test)`, r`Diverges (Limit Comparison with $\sum\frac1n$)`],
-        hint: r`$0 \le \sin^2 n \le 1$.`,
-        solution: [
-          r`Since $0 \le \sin^2 n \le 1$: $0 \le \frac{\sin^2 n}{n^2} \le \frac{1}{n^2}$.`,
-          r`$\sum\frac{1}{n^2}$ converges (p = 2).`,
-          r`By Direct Comparison, the series **converges**. (It isn't alternating — $\sin^2 n \ge 0$.)`,
-        ],
-      }),
-      mc({
-        id: 's11_7_q5',
-        question: r`Does $$\sum_{n=1}^\infty\frac{\ln n}{n^2}$$ converge?`,
-        answer: r`Converges`,
-        wrong: [r`Diverges (Limit Comparison with $\sum\frac1n$)`, r`Diverges (Divergence Test)`, r`Every test is inconclusive`],
-        hint: r`$\ln n$ grows slower than $\sqrt n$. Compare with $\frac{\sqrt n}{n^2} = \frac{1}{n^{3/2}}$.`,
-        solution: [
-          r`For large $n$, $\ln n < \sqrt n$ (logs grow slower than any positive power).`,
-          r`So $\frac{\ln n}{n^2} < \frac{\sqrt n}{n^2} = \frac{1}{n^{3/2}}$ for large $n$.`,
-          r`$\sum\frac{1}{n^{3/2}}$ converges ($p = \frac32 > 1$) ⟹ the series **converges** by Direct Comparison.`,
-          r`(The Integral Test with parts also works: $\int_1^\infty\frac{\ln x}{x^2}dx = 1$.)`,
-        ],
-      }),
-    ],
+    questions: BLOCK3_QUESTIONS['11.7'],
   }),
 
   // ─────────────────────────── 11.8 ───────────────────────────
@@ -598,70 +161,7 @@ export const BLOCK3_LESSONS = [
         r`**Interval:** $[-1, 1)$.`,
       ],
     },
-    questions: [
-      mc({
-        id: 's11_8_q1',
-        question: r`Find the radius of convergence of $$\sum_{n=0}^\infty\frac{x^n}{n!}$$`,
-        answer: r`$R = \infty$`,
-        wrong: [r`$R = 0$`, r`$R = 1$`, r`$R = e$`],
-        hint: r`$\frac{n!}{(n + 1)!} = \frac{1}{n + 1}$.`,
-        solution: [
-          r`$\left|\frac{x^{n+1}}{(n+1)!}\cdot\frac{n!}{x^n}\right| = \frac{|x|}{n + 1}$.`,
-          r`For any fixed $x$, $\frac{|x|}{n + 1} \to 0 < 1$.`,
-          r`Converges for **every** $x$ ⟹ $R = \infty$. (This is the series for $e^x$.)`,
-        ],
-      }),
-      mc({
-        id: 's11_8_q2',
-        question: r`Find the radius of convergence of $$\sum_{n=0}^\infty n!\,x^n$$`,
-        answer: r`$R = 0$`,
-        wrong: [r`$R = \infty$`, r`$R = 1$`, r`$R = \frac1e$`],
-        hint: r`$\frac{(n+1)!}{n!} = n + 1$.`,
-        solution: [
-          r`$\left|\frac{(n+1)!\,x^{n+1}}{n!\,x^n}\right| = (n + 1)|x|$.`,
-          r`If $x \ne 0$, this $\to\infty > 1$ ⟹ diverges.`,
-          r`Only converges at $x = 0$ ⟹ $R = 0$.`,
-        ],
-      }),
-      mc({
-        id: 's11_8_q3',
-        question: r`Find the radius of convergence of $$\sum_{n=0}^\infty\frac{(x - 2)^n}{3^n}$$`,
-        answer: r`$R = 3$`,
-        wrong: [r`$R = \frac13$`, r`$R = 2$`, r`$R = 1$`],
-        hint: r`It's geometric with ratio $\frac{x - 2}{3}$.`,
-        solution: [
-          r`$\frac{(x-2)^n}{3^n} = \left(\frac{x - 2}{3}\right)^n$ — geometric with ratio $\frac{x - 2}{3}$.`,
-          r`Converges when $\left|\frac{x - 2}{3}\right| < 1 \iff |x - 2| < 3$.`,
-          r`$R = 3$, centered at $2$: open interval $(-1, 5)$. (Endpoints give $\sum 1^n$ and $\sum(-1)^n$, both divergent.)`,
-        ],
-      }),
-      mc({
-        id: 's11_8_q4',
-        question: r`Find the interval of convergence of $$\sum_{n=1}^\infty\frac{x^n}{n^2}$$`,
-        answer: r`$[-1, 1]$`,
-        wrong: [r`$(-1, 1)$`, r`$[-1, 1)$`, r`$(-1, 1]$`],
-        hint: r`$R = 1$. Now test $x = 1$ and $x = -1$.`,
-        solution: [
-          r`Ratio: $|x|\left(\frac{n}{n+1}\right)^2 \to |x|$ ⟹ $R = 1$.`,
-          r`$x = 1$: $\sum\frac{1}{n^2}$ converges (p = 2). Include.`,
-          r`$x = -1$: $\sum\frac{(-1)^n}{n^2}$ converges absolutely. Include.`,
-          r`Interval: $[-1, 1]$.`,
-        ],
-      }),
-      mc({
-        id: 's11_8_q5',
-        question: r`Find the interval of convergence of $$\sum_{n=1}^\infty\frac{(x - 3)^n}{n}$$`,
-        answer: r`$[2, 4)$`,
-        wrong: [r`$(2, 4]$`, r`$(2, 4)$`, r`$[2, 4]$`],
-        hint: r`Center $3$, radius $1$. Which endpoint gives the harmonic series?`,
-        solution: [
-          r`Ratio: $|x - 3|\cdot\frac{n}{n + 1} \to |x - 3|$ ⟹ $|x - 3| < 1$, so $R = 1$, center $3$: $(2, 4)$.`,
-          r`$x = 4$: $\sum\frac{1^n}{n} = \sum\frac1n$ — diverges. Exclude $4$.`,
-          r`$x = 2$: $\sum\frac{(-1)^n}{n}$ — converges (AST). Include $2$.`,
-          r`Interval: $[2, 4)$.`,
-        ],
-      }),
-    ],
+    questions: BLOCK3_QUESTIONS['11.8'],
   }),
 
   // ─────────────────────────── 11.9 ───────────────────────────
@@ -680,71 +180,7 @@ export const BLOCK3_LESSONS = [
         r`**Result:** $$\ln(1 + x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \cdots,\quad R = 1$$`,
       ],
     },
-    questions: [
-      mc({
-        id: 's11_9_q1',
-        question: r`Find a power series for $$\frac{1}{1 + x}$$`,
-        answer: r`$\sum_{n=0}^\infty(-1)^nx^n,\ |x| < 1$`,
-        wrong: [r`$\sum_{n=0}^\infty x^n,\ |x| < 1$`, r`$\sum_{n=0}^\infty\frac{(-1)^nx^n}{n!}$`, r`$\sum_{n=1}^\infty\frac{(-1)^{n+1}x^n}{n}$`],
-        hint: r`$1 + x = 1 - (-x)$.`,
-        solution: [
-          r`$\frac{1}{1 + x} = \frac{1}{1 - (-x)}$.`,
-          r`Geometric with "something" $= -x$: $\sum(-x)^n = \sum(-1)^nx^n$.`,
-          r`Valid when $|-x| < 1 \iff |x| < 1$.`,
-          r`(The last option is the series for $\ln(1 + x)$.)`,
-        ],
-      }),
-      mc({
-        id: 's11_9_q2',
-        question: r`Find a power series for $$\frac{1}{1 - 3x}$$`,
-        answer: r`$\sum_{n=0}^\infty 3^nx^n,\ |x| < \frac13$`,
-        wrong: [r`$\sum_{n=0}^\infty 3^nx^n,\ |x| < 3$`, r`$\sum_{n=0}^\infty 3x^n,\ |x| < 1$`, r`$\sum_{n=0}^\infty\frac{x^n}{3^n},\ |x| < 3$`],
-        hint: r`Replace $x$ by $3x$, and adjust the condition too.`,
-        solution: [
-          r`Geometric with "something" $= 3x$: $\sum(3x)^n = \sum 3^nx^n$.`,
-          r`Condition: $|3x| < 1 \iff |x| < \frac13$.`,
-          r`So $R = \frac13$.`,
-        ],
-      }),
-      mc({
-        id: 's11_9_q3',
-        question: r`Find a power series for $$\frac{x}{1 + x^2}$$`,
-        answer: r`$\sum_{n=0}^\infty(-1)^nx^{2n+1}$`,
-        wrong: [r`$\sum_{n=0}^\infty(-1)^nx^{2n}$`, r`$\sum_{n=0}^\infty x^{2n+1}$`, r`$\sum_{n=0}^\infty(-1)^nx^{n+1}$`],
-        hint: r`First expand $\frac{1}{1 + x^2}$ by replacing $x$ with $-x^2$, then multiply by $x$.`,
-        solution: [
-          r`$\frac{1}{1 + x^2} = \frac{1}{1 - (-x^2)} = \sum(-x^2)^n = \sum(-1)^nx^{2n}$.`,
-          r`Multiply by $x$: $\frac{x}{1 + x^2} = \sum(-1)^nx^{2n+1} = x - x^3 + x^5 - \cdots$.`,
-          r`Valid for $|x| < 1$.`,
-        ],
-      }),
-      mc({
-        id: 's11_9_q4',
-        question: r`Using $\frac{1}{1 + x^2} = \sum(-1)^nx^{2n}$, find a power series for $\arctan x$.`,
-        answer: r`$\sum_{n=0}^\infty\frac{(-1)^nx^{2n+1}}{2n + 1}$`,
-        wrong: [r`$\sum_{n=0}^\infty\frac{x^{2n+1}}{2n + 1}$`, r`$\sum_{n=0}^\infty\frac{(-1)^nx^{2n+1}}{(2n + 1)!}$`, r`$\sum_{n=0}^\infty\frac{(-1)^nx^{2n}}{2n}$`],
-        hint: r`$\arctan x = \int_0^x\frac{dt}{1 + t^2}$. Integrate term by term.`,
-        solution: [
-          r`$\arctan x = \int\frac{dx}{1 + x^2} = C + \sum(-1)^n\frac{x^{2n+1}}{2n + 1}$.`,
-          r`$x = 0$: $\arctan 0 = 0 = C$.`,
-          r`$\arctan x = x - \frac{x^3}{3} + \frac{x^5}{5} - \cdots$.`,
-          r`(With factorials it would be $\sin x$ — a common mix-up.)`,
-        ],
-      }),
-      mc({
-        id: 's11_9_q5',
-        question: r`Differentiate $\frac{1}{1 - x} = \sum_{n=0}^\infty x^n$ to find a series for $$\frac{1}{(1 - x)^2}$$`,
-        answer: r`$\sum_{n=1}^\infty nx^{n-1}$`,
-        wrong: [r`$\sum_{n=0}^\infty x^{2n}$`, r`$\sum_{n=0}^\infty\frac{x^{n+1}}{n + 1}$`, r`$\sum_{n=1}^\infty\frac{x^n}{n}$`],
-        hint: r`$\frac{d}{dx}\frac{1}{1 - x} = \frac{1}{(1-x)^2}$.`,
-        solution: [
-          r`$\frac{d}{dx}(1 - x)^{-1} = (1 - x)^{-2}$ (the two minus signs cancel).`,
-          r`Differentiate each term: $\frac{d}{dx}x^n = nx^{n-1}$. The $n = 0$ term is a constant, so it disappears.`,
-          r`$\frac{1}{(1-x)^2} = \sum_{n=1}^\infty nx^{n-1} = 1 + 2x + 3x^2 + \cdots$, $|x| < 1$.`,
-          r`Trap: $\frac{1}{(1-x)^2}$ is **not** $\sum x^{2n}$ — you can't just square each term.`,
-        ],
-      }),
-    ],
+    questions: BLOCK3_QUESTIONS['11.9'],
   }),
 
   // ─────────────────────────── 11.10 ───────────────────────────
@@ -764,72 +200,6 @@ export const BLOCK3_LESSONS = [
         r`**Use it:** $e^1 \approx 1 + 1 + \frac12 + \frac16 + \frac1{24} \approx 2.708$ (true value $2.718\ldots$).`,
       ],
     },
-    questions: [
-      mc({
-        id: 's11_10_q1',
-        question: r`Which is the Maclaurin series for $\sin x$?`,
-        answer: r`$x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots$`,
-        wrong: [r`$1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots$`, r`$x + \frac{x^3}{3!} + \frac{x^5}{5!} + \cdots$`, r`$1 + x + \frac{x^2}{2!} + \cdots$`],
-        hint: r`$\sin 0 = 0$, and $\sin$ is an odd function.`,
-        solution: [
-          r`Derivatives at $0$ cycle: $\sin 0 = 0$, $\cos 0 = 1$, $-\sin 0 = 0$, $-\cos 0 = -1$, then repeat.`,
-          r`Coefficients: $0, 1, 0, -\frac{1}{3!}, 0, \frac{1}{5!}, \ldots$`,
-          r`$\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots$ — odd powers, alternating signs.`,
-          r`The others are $\cos x$, $\sinh x$, and $e^x$.`,
-        ],
-      }),
-      mc({
-        id: 's11_10_q2',
-        question: r`Find the second-degree Taylor polynomial of $f(x) = \sqrt{x}$ centered at $a = 4$.`,
-        answer: r`$2 + \frac{x - 4}{4} - \frac{(x - 4)^2}{64}$`,
-        wrong: [r`$2 + \frac{x - 4}{4} - \frac{(x - 4)^2}{32}$`, r`$2 + \frac{x - 4}{4} + \frac{(x - 4)^2}{64}$`, r`$2 + \frac{x}{4} - \frac{x^2}{64}$`],
-        hint: r`Compute $f(4), f'(4), f''(4)$, and remember to divide $f''(4)$ by $2!$.`,
-        solution: [
-          r`$f(x) = x^{1/2}$: $f(4) = 2$.`,
-          r`$f'(x) = \frac12x^{-1/2}$: $f'(4) = \frac{1}{2\cdot2} = \frac14$.`,
-          r`$f''(x) = -\frac14x^{-3/2}$: $f''(4) = -\frac14\cdot\frac{1}{8} = -\frac{1}{32}$.`,
-          r`$T_2(x) = f(4) + f'(4)(x - 4) + \frac{f''(4)}{2!}(x - 4)^2 = 2 + \frac{x - 4}{4} - \frac{(x - 4)^2}{64}$.`,
-          r`Forgetting the $2!$ gives $\frac{1}{32}$; using powers of $x$ instead of $(x - 4)$ gives the last option.`,
-        ],
-      }),
-      mc({
-        id: 's11_10_q3',
-        question: r`What is the coefficient of $x^2$ in the Maclaurin series of $\cos x$?`,
-        answer: r`$-\frac12$`,
-        wrong: [r`$\frac12$`, r`$-1$`, r`$0$`],
-        hint: r`$\frac{f''(0)}{2!}$.`,
-        solution: [
-          r`$f(x) = \cos x$, $f'(x) = -\sin x$, $f''(x) = -\cos x$.`,
-          r`$f''(0) = -1$.`,
-          r`Coefficient $= \frac{f''(0)}{2!} = -\frac12$. Matches $\cos x = 1 - \frac{x^2}{2!} + \cdots$.`,
-        ],
-      }),
-      mc({
-        id: 's11_10_q4',
-        question: r`Find the Maclaurin series for $e^{-x^2}$.`,
-        answer: r`$\sum_{n=0}^\infty\frac{(-1)^nx^{2n}}{n!}$`,
-        wrong: [r`$\sum_{n=0}^\infty\frac{(-1)^nx^{2n}}{(2n)!}$`, r`$\sum_{n=0}^\infty\frac{x^{2n}}{n!}$`, r`$\sum_{n=0}^\infty\frac{(-1)^nx^n}{n!}$`],
-        hint: r`Substitute $-x^2$ for $x$ in $e^x = \sum\frac{x^n}{n!}$.`,
-        solution: [
-          r`$e^u = \sum\frac{u^n}{n!}$ with $u = -x^2$.`,
-          r`$(-x^2)^n = (-1)^nx^{2n}$.`,
-          r`$e^{-x^2} = \sum\frac{(-1)^nx^{2n}}{n!} = 1 - x^2 + \frac{x^4}{2!} - \cdots$.`,
-          r`The denominator stays $n!$ — substituting doesn't change it. ($(2n)!$ belongs to $\cos x$.)`,
-        ],
-      }),
-      mc({
-        id: 's11_10_q5',
-        question: r`Use series to evaluate $$\lim_{x\to0}\frac{\sin x - x}{x^3}$$`,
-        answer: r`$-\frac16$`,
-        wrong: [r`$\frac16$`, r`$0$`, r`$-\frac12$`],
-        hint: r`Replace $\sin x$ with $x - \frac{x^3}{6} + \frac{x^5}{120} - \cdots$.`,
-        solution: [
-          r`$\sin x - x = \left(x - \frac{x^3}{6} + \frac{x^5}{120} - \cdots\right) - x = -\frac{x^3}{6} + \frac{x^5}{120} - \cdots$.`,
-          r`Divide by $x^3$: $-\frac16 + \frac{x^2}{120} - \cdots$.`,
-          r`As $x\to0$, all remaining terms vanish: limit $= -\frac16$.`,
-          r`(L'Hôpital three times gives the same answer, with more work.)`,
-        ],
-      }),
-    ],
+    questions: BLOCK3_QUESTIONS['11.10'],
   }),
 ];
